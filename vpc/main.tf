@@ -57,6 +57,7 @@ resource "aws_route" "internet_access" {
 
 # Create a NAT gateway with an EIP for each private subnet to get internet connectivity
 resource "aws_eip" "eip" {
+  for_each = local.az_map
   vpc        = true
   depends_on = [aws_internet_gateway.gw]
   tags = {
@@ -67,7 +68,7 @@ resource "aws_eip" "eip" {
 resource "aws_nat_gateway" "nat_gw" {
   for_each = local.az_map
   subnet_id = aws_subnet.public_subnet[each.key].id
-  allocation_id = aws_eip.eip.id
+  allocation_id = aws_eip.eip[each.key].id
   depends_on    = [aws_internet_gateway.gw]
   tags = {
     Name        = "${var.name}-${var.environment}"

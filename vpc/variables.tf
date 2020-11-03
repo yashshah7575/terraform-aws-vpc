@@ -7,9 +7,9 @@ variable "environment" {
 }
 
 variable subnet_count{
-    description = ""
+    description = "count of subnet we want to create"
 }
 
 variable subnet_cidr_size {
-    description = ""
+    description = "cidr size"
 }
