@@ -24,5 +24,12 @@ variable "subnet_cidr_size" {
 }
 
 variable "default_tags" {
-  default = {}
+  default     = { ApplicationName = "Manage User Applcation", Environment = "Dev" }
+  description = "Additional resource tags"
+  type        = map(string)
 }
+
+
+#hub_default_route = tgw = true
+#service_rail_route = tgw = true
+#on_prem_route = tgw = false
